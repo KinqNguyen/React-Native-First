@@ -1,21 +1,36 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React,{component} from 'react';
+import { StyleSheet,nav, Text,ScrollView ,View,TextInput, FlatList,CheckBox,Button,Picker } from 'react-native';
+import UserListItem from './Component/Front_end/userListItem';
+import Dropdown from './Component/Front_end/Dropdown';
+import Swipeout from 'react-native-swipeout';
+import UserData from './Component/Data/UserData';
+import HumanData from './Component/Data/BranchData';
 
-export default function App() {
+
+export default class App extends React.Component {
+
+
+
+  render(){
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+
+      <UserListItem/>
+      </View>
   );
+  }
 }
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'stretch',
+   marginTop: 22,
+    
   },
+ 
 });
