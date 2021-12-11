@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text ,View, FlatList,Image,Button, TouchableOpacity, Alert,TextInput,CheckBox,Picker } from 'react-native';
+import App from '../../App.js';
+import Dropdown from './Dropdown.js';
 import Swipeout  from 'react-native-swipeout';
 import { render } from 'react-dom';
 import UserData from '../Data/UserData.js';
 import HumanData from '../Data/BranchData.js';
 import EditItem from '../Back_end/EditItem.js';
 import AddItem from '../Back_end/AddItem.js';
-import { getProductFromServer } from '../../Networking/server.js';
+import mess from '../../assets/add-user.png'
+import iconlabel from '../../assets/favicon.png'
+import { getProductFromServer, getProductFromServer_en } from '../../Networking/server.js';
+import {NavigationContainer} from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 class UserListItem extends Component {
   constructor(props){
@@ -84,7 +90,7 @@ class UserListItem extends Component {
               </Text>
               <Text style={{width:3}}/>
               <Text style={{fontSize:14, fontWeight:"bold",color:"red"}}>
-                    ( Số lượng : {this.props.item.stock})
+                    ( Stock : {this.props.item.stock})
               </Text>
             </View>
 
@@ -92,8 +98,13 @@ class UserListItem extends Component {
                 {this.props.item.name}
             </Text>
 
-            <Text style={styles.title}>
-                {this.props.item.description}
+            <Text style={styles.title} >
+               Giá :  {this.props.item.price} 
+            </Text>
+            <Text style={styles.title} >
+               Giá cũ : 
+               <Text style={{textDecorationLine:"line-through",fontSize:11}}>{this.props.item.originalPrice} 
+               </Text> 
             </Text>
         </View>
         </View>
@@ -119,11 +130,10 @@ class UserListItem extends Component {
 const styles = StyleSheet.create({
 
   container: {
-        flex: 1,
+    flex: 1,
+    marginTop:5,
     backgroundColor: '#fff',
-    alignItems: 'stretch',
-    justifyContent: 'center',
-   marginTop: 22,    
+    alignItems: 'stretch',    
   
   },
 
@@ -230,7 +240,7 @@ export default class userList extends Component {
       }
 
       refreshDataFromServer = () =>{
-      getProductFromServer().then((products)=>{
+      getProductFromServer_en().then((products)=>{
           this.setState({ProductFromServer:products})
       }).catch((error) =>{
          this.setState({ProductFromServer:[]})
@@ -254,9 +264,14 @@ export default class userList extends Component {
 
   return (
     <View style={styles.container}>
-        <View style={{backgroundColor:"#FF3836", alignItems:"center",justifyContent:"center",flexDirection:"row"}}>
-          <View style={{width:"100%" , alignItems:"center", flexDirection:"row"}} >
+        <View style={{height:70,backgroundColor:"#FF3836", alignItems:"center",justifyContent:"center",paddingRight:10,flexDirection:"row"}}>
+          <View style={{width:"80%" , alignItems:"center", flexDirection:"row"}} >
+              <Image style={{height:45,width:45,marginLeft:90}} source={iconlabel}></Image>
+              <Text style={{color:"#fff", fontWeight:"bold", fontSize:15}}>Web shop</Text>
           </View>
+        <TouchableOpacity onPress={this._onPressAdd}>
+          <Image style={{height:45,width:45}} source={mess}></Image>
+        </TouchableOpacity>
         </View>
         
         {/* data={UserData} this.state.ProductFromServer*/}

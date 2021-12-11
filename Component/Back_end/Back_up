@@ -10,21 +10,6 @@ import HumanData from './Component/Data/BranchData';
 
 export default class App extends React.Component {
 
-constructor(props){
-        super(props);
-       
-        this.state={
-          selectedCountry : null
-        };
-    }
-
-
-
-    countryList = () =>{
-        return(  HumanData.map( (x) => { 
-              return( <Picker.Item label={x.branch} key={x.id} value={x.id}  />)} ));
-    }
-
 
 
   render(){
@@ -32,45 +17,8 @@ constructor(props){
   return (
     <View style={styles.container}>
 
-      
-      
-        <View style={{marginTop:50}}>
-        <TextInput placeholder="Nhập tên"/>
-        <TextInput placeholder="Nhập SĐT"/>
-        </View>
-
-        <View style={styles.viewinput} style={{ alignItems: 'center', flexDirection: 'row',  }}>
-            <CheckBox tintColors={{ true: 'black' }} style={{}}/>
-            <Text style={styles.baseText}>Male</Text>
-            <CheckBox tintColors={{ true: 'black' }}   value={false}/>
-            <Text style={styles.baseText}>Female</Text>
-        </View>
-        
-        <Dropdown />
-        
-          <Picker
-                    selectedValue={this.state.selectedCountry}
-                    onValueChange={ (value) => ( this.setState({selectedCountry : value}) )}>
-                    { this.countryList() }
-          </Picker>
-        
-        
-        <View style={styles.viewRow} style={{alignItems: 'center',flexDirection:'row',marginLeft:40}} >
-          <Button  color="green" style={styles.buttonn} style= {{}} title="Add"> </Button>
-          <View style={{width:60}}></View>
-            <Button   color="#FF0000" style={styles.buttonn} title="Delete"> </Button>
-            <View style={{width:60}}></View>
-            <Button  color="#2D3CA5" style={styles.buttonn} title="Update"> </Button>
-          </View>
-        
-        
-        {/* <FlatList data={UserData} renderItem={({item}) => <UserListItem user={item}/>} keyExtractor= {item => '${item.id}'} contentContainerStyle={{paddingLeft :16, paddingRight :16}} /> */}
-        <FlatList data={UserData} renderItem={({item, index}) => { return (<UserListItem user={item} index={index}></UserListItem>);}} />
-      
-      
-
-      
-    </View>
+      <UserListItem/>
+      </View>
   );
   }
 }
@@ -84,26 +32,5 @@ const styles = StyleSheet.create({
    marginTop: 22,
     
   },
-  viewCol:{
-    flex :1,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    flexDirection:'column',
-  },
-  buttonn:{
-      flex:1,
-      backgroundColor: '#00aeef',
-      borderColor: 'red',
-      borderWidth: 5,
-      borderRadius: 15   
-      
-  },
-
-  viewRow:{
-    marginTop:30,
-    flex :1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    flexDirection:'row',
-  },
+ 
 });
